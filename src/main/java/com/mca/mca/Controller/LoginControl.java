@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -15,19 +16,18 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 public class LoginControl {
     
-    @Autowired
-    private HttpSession httpSession;
+   
 
     @PostMapping("/loginattempt")
     public ModelAndView postMethodName(String username,
-                                    @RequestParam("pass") String password) {
+                                    @RequestParam("pass") String password,
+                                    HttpServletRequest request) {
         
-        System.out.println("fdjhsgdfhjgsjdf");
         if(username.equals("admin") && password.equals("admin")){
-            httpSession.setAttribute("user", username);
-            System.out.println("hsfdfhsagdfh");
-            System.out.println(httpSession.getAttribute("user"));
-            return new ModelAndView("landing");
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
+            System.out.println(session.getId());
+            return new ModelAndView("redirect:/home");
         }else{
             return new ModelAndView("login");
         }
