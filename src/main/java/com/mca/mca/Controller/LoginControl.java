@@ -5,26 +5,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.*;
+import jakarta.servlet.http.HttpSession;
 
-@Controller
+
+
+@RestController
 public class LoginControl {
     
     @Autowired
-    private HttpSession HttpSession;
+    private HttpSession httpSession;
 
     @PostMapping("/loginattempt")
-    public String postMethodName(@RequestParam String username,
-                                    @RequestParam String password) {
-        //TODO: process POST request
+    public ModelAndView postMethodName(String username,
+                                    @RequestParam("pass") String password) {
         
-        if(username=="admin" && password=="admin"){
-            HttpSession.setAttribute("user", username);
-            System.out.println(HttpSession.getAttribute(username));
-            return "landing";
+        System.out.println("fdjhsgdfhjgsjdf");
+        if(username.equals("admin") && password.equals("admin")){
+            httpSession.setAttribute("user", username);
+            System.out.println("hsfdfhsagdfh");
+            System.out.println(httpSession.getAttribute("user"));
+            return new ModelAndView("landing");
         }else{
-            return "login";
+            return new ModelAndView("login");
         }
     }
     
