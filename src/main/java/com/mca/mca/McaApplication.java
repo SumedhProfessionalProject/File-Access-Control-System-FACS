@@ -8,6 +8,7 @@ public class McaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(McaApplication.class, args);
+		
 	}
 
 }
