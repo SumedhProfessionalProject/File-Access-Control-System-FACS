@@ -11,6 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.SERVICE.UserPOJOService;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 @RestController
 public class Controller {
 
@@ -48,4 +54,11 @@ public class Controller {
             
             
         }
+
+        @GetMapping("/file")
+        public ModelAndView getMethodName(HttpServletRequest request) {
+            System.out.println((String) request.getSession().getAttribute("name"));
+            return new ModelAndView("file");
+        }
+        
 }

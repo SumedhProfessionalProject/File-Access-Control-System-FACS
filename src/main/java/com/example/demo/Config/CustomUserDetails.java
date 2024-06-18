@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.POJOS.UserPOJO;
 
+
+
 public class CustomUserDetails implements UserDetails{
 
     private UserPOJO userPOJO;
@@ -31,6 +33,10 @@ public class CustomUserDetails implements UserDetails{
     public String getUsername() {
         return userPOJO.getUsername();
         
+    }
+
+    public String getName(){
+        return userPOJO.getName();
     }
 
     @Override
