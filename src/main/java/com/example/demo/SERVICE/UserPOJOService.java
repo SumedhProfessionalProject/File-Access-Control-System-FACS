@@ -47,4 +47,12 @@ public class UserPOJOService implements UserDetailsService {
 
     }
 
+    public boolean adminOrNot(String name){
+        return userRepo.findById(name).orElse(null).isIsadmin();
+    }
+
+    public List<UserPOJO> getAll(){
+        return userRepo.findAll();
+    }
+
 }

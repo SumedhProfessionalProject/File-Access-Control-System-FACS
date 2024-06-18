@@ -21,6 +21,17 @@
         </form>
         <br>
         <hr>
+        <div th:if="${admin}">
+            <form action="#" method="post">
+                <label for="option">Choose an option:</label>
+                <select id="option" name="option">
+                    <option value="no" disabled selected>Select an option</option>
+                    <option th:each="name : ${names}" th:value="${name.username}" th:text="${name.name}"></option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+         </div>
+        <hr>
         <table border="1px">
             <tr>
                 <th>File name</th>

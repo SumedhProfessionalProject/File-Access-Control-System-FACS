@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 import com.example.demo.POJOS.FilePOJO;
+import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.REPOS.FileRepo;
 import com.example.demo.REPOS.UserRepo;
 
@@ -32,9 +33,11 @@ public class FileService {
        return fileRepo.findByCreator(user);
     }
 
-    public FilePOJO getFile(String name){
-        return fileRepo.findById(name).orElse(null);
-    }
+    
+
+    // public List<String> getCreatorName(){
+    //     return fileRepo.findAllCreator();
+    // }
     // public List<FilePOJO> getAllAsAdmin(){
     //     return fileRepo.findAll();
     // }

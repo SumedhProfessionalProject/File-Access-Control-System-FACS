@@ -48,7 +48,7 @@ public class UploadController {
                                     @RequestParam String name        
                                 ,HttpSession session) throws IOException {
 
-        System.out.println("dasdasdasd");
+        
 
         FilePOJO filePOJO=new FilePOJO();
         filePOJO.setContentType(file.getContentType());

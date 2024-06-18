@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.POJOS.FilePOJO;
 import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.SERVICE.FileService;
 import com.example.demo.SERVICE.UserPOJOService;
@@ -62,7 +64,18 @@ public class Controller {
         @GetMapping({"/file","/"})
         public ModelAndView getMethodName(HttpServletRequest request) {
             String name=(String) request.getSession().getAttribute("user");
-            return new ModelAndView("file").addObject("name", name).addObject("files", fileService.getAll(name));
+            Boolean check=false;
+            List<UserPOJO> list=null;
+            if(userPOJOService.adminOrNot(name)){
+                check=true;
+                list=userPOJOService.getAll();
+                
+            }
+            return new ModelAndView("file")
+                        .addObject("name", name)
+                        .addObject("files", fileService.getAll(name))
+                        .addObject("admin", check)
+                        .addObject("names", list);
         }
 
         
