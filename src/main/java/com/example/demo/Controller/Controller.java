@@ -55,10 +55,10 @@ public class Controller {
             
         }
 
-        @GetMapping("/file")
+        @GetMapping({"/file","/"})
         public ModelAndView getMethodName(HttpServletRequest request) {
-            System.out.println((String) request.getSession().getAttribute("name"));
-            return new ModelAndView("file");
+            String name=(String) request.getSession().getAttribute("fullname");
+            return new ModelAndView("file").addObject("name", name);
         }
         
 }

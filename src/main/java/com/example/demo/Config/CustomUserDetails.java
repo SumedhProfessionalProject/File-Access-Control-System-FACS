@@ -29,6 +29,7 @@ public class CustomUserDetails implements UserDetails{
        
         return userPOJO.getPassword();
     }
+    
     @Override
     public String getUsername() {
         return userPOJO.getUsername();
