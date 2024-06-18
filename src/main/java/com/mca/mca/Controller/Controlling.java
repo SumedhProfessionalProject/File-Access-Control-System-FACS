@@ -18,28 +18,32 @@ import jakarta.servlet.http.HttpSession;
 public class Controlling {
     
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public ModelAndView home(){
         return new ModelAndView("login");
     }
 
     @GetMapping("/home")
-    public ModelAndView land(HttpSession session) {
-        if(session!=null){
+    public ModelAndView land(HttpServletRequest request) {
+        if(request.getSession()!=null){
             ModelAndView modelAndView=new ModelAndView("landing");
-            String name=(String)session.getAttribute("user");
+            String name=(String)request.getSession().getAttribute("user");
             modelAndView.addObject("user", name);
             
             return modelAndView;
         }else{
-            return new ModelAndView("login");
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @GetMapping("/logout")
-    public ModelAndView getMethodName(HttpSession httpSession) {
-        httpSession.invalidate();
-        return new ModelAndView("login");
+    public ModelAndView getMethodName(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.removeAttribute("user");
+            session.invalidate();
+        }
+        return new ModelAndView("redirect:/login");
     }
     
     
