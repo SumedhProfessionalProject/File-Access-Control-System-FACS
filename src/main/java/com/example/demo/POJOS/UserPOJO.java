@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.POJOS;
 
 import org.apache.catalina.User;
 

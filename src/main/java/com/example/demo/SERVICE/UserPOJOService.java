@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.SERVICE;
 
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.Config.CustomUserDetails;
+import com.example.demo.POJOS.UserPOJO;
+import com.example.demo.REPOS.UserRepo;
 
 @Service
 public class UserPOJOService implements UserDetailsService {
