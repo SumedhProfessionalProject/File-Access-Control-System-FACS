@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.POJOS.UserPOJO;
+import com.example.demo.SERVICE.FileService;
 import com.example.demo.SERVICE.UserPOJOService;
 
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +23,9 @@ public class Controller {
 
         @Autowired
         private UserPOJOService userPOJOService;
+
+        @Autowired
+        private FileService fileService;
 
         @PostMapping("/registerhtml")
         public ModelAndView processRegister(@RequestParam String username,
@@ -57,8 +61,10 @@ public class Controller {
 
         @GetMapping({"/file","/"})
         public ModelAndView getMethodName(HttpServletRequest request) {
-            String name=(String) request.getSession().getAttribute("fullname");
-            return new ModelAndView("file").addObject("name", name);
+            String name=(String) request.getSession().getAttribute("user");
+            return new ModelAndView("file").addObject("name", name).addObject("files", fileService.getAll(name));
         }
+
+        
         
 }

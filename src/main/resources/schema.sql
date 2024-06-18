@@ -8,3 +8,13 @@ create table if not exists users(
     primary key(username)
 
 );
+
+CREATE TABLE IF NOT EXISTS filemanager (
+    name VARCHAR(255) NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    file LONGBLOB NOT NULL,
+    date VARCHAR(255) NOT NULL,
+    creator VARCHAR(255) NOT NULL,
+    contenttype VARCHAR(255) NOT NULL,
+    PRIMARY KEY(name)
+);

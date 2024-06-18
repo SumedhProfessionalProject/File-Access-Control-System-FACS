@@ -59,7 +59,7 @@ public class WebConfig {
 
         http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home","/register","/registerhtml").permitAll()
+				.requestMatchers("/register","/registerhtml").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form

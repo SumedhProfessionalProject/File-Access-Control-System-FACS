@@ -14,5 +14,33 @@
         <h1>Welcome!</h1>
         <h3>user:<span th:text="${name}"></span></h3>
         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+            <input type="file" id="file" name="file">
+            name:<input type="text" name="name">
+            <button type="submit">Upload</button>
+        </form>
+        <br>
+        <hr>
+        <table border="1px">
+            <tr>
+                <th>File name</th>
+                <th>Original name</th>
+                <th>Content-type</th>
+                <th>Date created</th>
+                <th>Created By</th>
+                <th>Download</th>
+            </tr>
+            <tr th:each="file: ${files}" >
+                <td th:text="${file.filename}"></td>
+                <td th:text="${file.name}"></td>
+                <td th:text="${file.contentType}"></td>
+                <td th:text="${file.date}"></td>
+                <td th:text="${file.creator}"></td>
+                <td><form action="/download">
+                    <button type="submit" th:value="${file.name}" name="download">Dowload</button>
+                </form></td>
+            </tr>
+        </table>
+
     </body>
 </html>
