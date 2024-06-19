@@ -1,23 +1,85 @@
 <!DOCTYPE html>
- <!---
-    login page ye
-    DO NOT TOUCH THE HTML PAGE AND JO TH: WALE PARAMETER
-    -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+
+<head>
+    <title>Spring Security Example</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        /* Login form container */
+        .login-form {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* Labels and inputs */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+
+        /* Login button */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+    <script>
+        function showErrorPopup() {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <div id="error-message"
+        style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        Invalid username or password.
+    </div>
+    <div th:if="${param.error}">
+        <script>showErrorPopup();</script>
+    </div> -->
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}"> You have been logged out. </div>
+    <form th:action="@{/login}" method="post" class="login-form">
+        <div><label> User Name : <input type="text" name="username" /></label></div>
+        <div><label> Password: <input type="password" name="password" /></label></div>
+        <div><input type="submit" value="Sign In" /></div>
+    </form>
+</body>
+
 </html>
