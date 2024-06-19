@@ -9,6 +9,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+/**
+ * User POJO
+ * @author
+ *    sumedh
+ */
 @Entity(name="users")
 @Data
 public class UserPOJO {

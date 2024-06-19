@@ -6,6 +6,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.Data;
 
+/**
+ *  File POJO
+ * @author
+ *    sumedh
+ */
 @Entity(name="filemanager")
 @Data
 public class FilePOJO {

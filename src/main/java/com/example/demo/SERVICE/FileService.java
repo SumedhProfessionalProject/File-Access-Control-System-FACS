@@ -10,6 +10,9 @@ import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.REPOS.FileRepo;
 import com.example.demo.REPOS.UserRepo;
 
+/**
+ * File service to process files
+ */
 @Service
 public class FileService {
     
@@ -19,12 +22,18 @@ public class FileService {
     @Autowired
     private UserRepo userRepo;
     
+
     public void add(FilePOJO file){
         
         fileRepo.save(file);
         
     }
 
+    /**
+     * get all info for both admin and user
+     * @param user
+     * @return List<FilePOJO>
+     */
     public List<FilePOJO> getAll(String user){
 
        if(userRepo.findById(user).orElse(null).getRole()==UserPOJO.Role.ADMIN){
@@ -37,12 +46,6 @@ public class FileService {
         return fileRepo.findById(name).orElse(null);
     }
 
-    // public List<String> getCreatorName(){
-    //     return fileRepo.findAllCreator();
-    // }
-    // public List<FilePOJO> getAllAsAdmin(){
-    //     return fileRepo.findAll();
-    // }
 
     
 }

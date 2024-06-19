@@ -2,42 +2,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <title>Spring Security Example</title>
+    <title>Login</title>
     <style>
         /* General styles */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
+            background-color: #D2DAFF;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
-        /* Login form container */
-        .login-form {
-            background-color: #fff;
+        .title{
+            font-family: serif;
+            font-size: 40px;
+        }
+        form{
+            background-color:#B1B2FF;
             border-radius: 5px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             padding: 30px;
+            padding-top: 10px;
             text-align: center;
+            width: 400px;
+        }
+        /* Login form container */
+       
+
+        .error-message {
+            color: red; /* Adjust color as needed */
+            text-align: center;
+            margin-bottom: 15px; /* Add spacing for better visual separation */
         }
 
         /* Labels and inputs */
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             font-weight: bold;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 10px; 
+            align-items: center;
             border: 1px solid #ccc;
             border-radius: 3px;
             margin-bottom: 15px;
+            box-sizing: border-box;
         }
 
         /* Login button */
@@ -71,15 +86,26 @@
     <div th:if="${param.error}">
         <script>showErrorPopup();</script>
     </div> -->
-    <div th:if="${param.error}">
+    <!-- <div th:if="${param.error}" class="error-message">
         Invalid username and password.
     </div>
-    <div th:if="${param.logout}"> You have been logged out. </div>
-    <form th:action="@{/login}" method="post" class="login-form">
-        <div><label> User Name : <input type="text" name="username" /></label></div>
-        <div><label> Password: <input type="password" name="password" /></label></div>
-        <div><input type="submit" value="Sign In" /></div>
-    </form>
+    
+    <div th:if="${param.logout}" class="error-message"> You have been logged out. </div> -->
+    <div class="login-form" style="text-align: center;"> 
+       <h1 class="title">MCA DEPARTMENT </h1>
+       
+        <div th:if="${param.error}" class="error-message">
+            Invalid username and password.
+        </div>
+        
+        <div th:if="${param.logout}" class="error-message"> You have been logged out. </div>
+        <form th:action="@{/login}" method="post" >
+            <h2>Login</h2><br>
+            <div><label> User Name : <input type="text" name="username" /></label></div>
+            <div><label> Password: <input type="password" name="password" /></label></div>
+            <div><input type="submit" value="Sign In" /></div>
+        </form>
+    </div>
 </body>
 
 </html>

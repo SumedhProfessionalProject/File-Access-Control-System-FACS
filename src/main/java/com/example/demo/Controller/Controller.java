@@ -39,7 +39,9 @@ public class Controller {
                                             @RequestParam String adminusername,
                                             @RequestParam String adminpassword
                                     ) {
+
             ModelAndView modelAndView=new ModelAndView("register");
+            modelAndView.addObject("msg", "unsuccess");
             
             if(userPOJOService.isAdmin(adminusername)){  
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -55,9 +57,8 @@ public class Controller {
                 passwordEncoder=null;
                 userPOJO=null;
                 modelAndView.addObject("msg", "success");
-                return modelAndView;
             }
-            modelAndView.addObject("msg", "unsuccess");
+            
             return modelAndView;
             
             

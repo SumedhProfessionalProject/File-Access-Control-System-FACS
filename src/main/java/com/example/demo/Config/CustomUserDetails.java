@@ -10,7 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.example.demo.POJOS.UserPOJO;
 
 
-
+/**
+ * This is for auth 
+ * @implNote UserDetails
+ * authoritize
+ */
 public class CustomUserDetails implements UserDetails{
 
     private final UserPOJO userPOJO;
