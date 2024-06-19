@@ -6,11 +6,78 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head>
         <title>Logout</title>
+        <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+
     </head>
     <body>
-        <h1 th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+
+        <div class="wrapper">
+  
+            <div class="top_navbar">
+              <div class="hamburger">
+                 <div class="one"></div>
+                 <div class="two"></div>
+                 <div class="three"></div>
+              </div>
+              <div class="top_menu">
+                <div class="logo">
+                    <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
+                </div>
+                <ul>
+                  <li><a href="#">
+                    <i class="fas fa-search"></i>
+                    </a></li>
+                  <li><a href="#">
+                    <i class="fas fa-bell"></i>
+                    </a></li>
+                  <li><a href="#">
+                    <i class="fas fa-user"></i>
+                    </a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="sidebar">
+                <ul>
+                  <li><a href="/file">
+                    <span class="icon"><i class="fas fa-book"></i></span>
+                    <span class="title">Files</span>
+                    </a></li>
+                  <li><a href="/secured">
+                    <span class="icon"><i class="fas fa-file-video"></i></span>
+                    <span class="title">Admin</span>
+                    </a></li>
+                  <li><a href="#">
+                    <span class="icon"><i class="fas fa-volleyball-ball"></i></span>
+                    <span class="title">TimeTable</span>
+                    </a></li>
+                  <li><a href="#" class="active">
+                    <span class="icon"><i class="fas fa-blog"></i></span>
+                    <span class="title">Profile</span>
+                    </a></li>
+                  <li><a href="/logout">
+                    <span class="icon"><i class="fas fa-leaf"></i></span>
+                    <span class="title">Logout</span>
+                    </a></li>
+              </ul>
+            </div>
+            <div class="main_container">
+                <div >
+                    <p th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</p>
+                </div>
+                <div>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+       
+
+
+        <!-- <h1 th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
-        </form>
+        </form> -->
     </body>
 </html>
