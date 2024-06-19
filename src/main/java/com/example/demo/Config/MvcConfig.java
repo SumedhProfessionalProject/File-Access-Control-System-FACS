@@ -2,6 +2,7 @@ package com.example.demo.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -14,7 +15,9 @@ public class MvcConfig implements WebMvcConfigurer{
         registry.addViewController("/").setViewName("redirect:/file");
         registry.addViewController("/logout").setViewName("logout");
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/register").setViewName("register");
+       
+       
+        
 	
     }
 }

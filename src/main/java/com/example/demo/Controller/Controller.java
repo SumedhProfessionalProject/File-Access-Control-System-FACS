@@ -84,8 +84,8 @@ public class Controller {
         
         @GetMapping("/secured")
         @PreAuthorize("hasRole('ROLE_ADMIN')")
-        public String getMethodName() {
-            return "jhsdghdfhdf";
+        public ModelAndView getMethodName() {
+            return new ModelAndView("secured").addObject("msg", "secured");
         }
         
         
