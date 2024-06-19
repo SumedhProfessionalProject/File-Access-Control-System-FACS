@@ -22,11 +22,11 @@
         <br>
         <hr>
         <div th:if="${admin}">
-            <form action="#" method="post">
+            <form action="/file" method="get">
                 <label for="option">Choose an option:</label>
                 <select id="option" name="option">
                     <option value="no" disabled selected>Select an option</option>
-                    <option th:each="name : ${names}" th:value="${name.username}" th:text="${name.name}"></option>
+                    <option th:each="name : ${names}" name="option" th:value="${name.username}" th:text="${name.name}"></option>
                 </select>
                 <button type="submit">Submit</button>
             </form>

@@ -9,6 +9,5 @@ import com.example.demo.POJOS.UserPOJO;
 @Repository
 public interface UserRepo extends JpaRepository<UserPOJO,String>{
     
-    List<UserPOJO> findByisadminTrue();
 
 }

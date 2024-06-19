@@ -4,7 +4,7 @@ create table if not exists users(
     name varchar(255) not null,
     position varchar(255) not null,
     password varchar(255) not null,
-    isadmin bit not null,
+    role varchar(255) not null,
     primary key(username)
 
 );

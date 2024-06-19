@@ -1,8 +1,10 @@
 package com.example.demo.Config;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.POJOS.UserPOJO;
@@ -11,7 +13,7 @@ import com.example.demo.POJOS.UserPOJO;
 
 public class CustomUserDetails implements UserDetails{
 
-    private UserPOJO userPOJO;
+    private final UserPOJO userPOJO;
 
     public CustomUserDetails(UserPOJO user) {
         this.userPOJO = user;
@@ -21,7 +23,7 @@ public class CustomUserDetails implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(userPOJO.getRole().name()));
     }
 
     @Override

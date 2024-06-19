@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.SERVICE.FileService;
 import com.example.demo.SERVICE.UserPOJOService;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -39,13 +41,13 @@ public class Controller {
                                     ) {
             ModelAndView modelAndView=new ModelAndView("register");
             
-            if(userPOJOService.checkAdmin(adminusername, adminpassword)){  
+            if(userPOJOService.isAdmin(adminusername)){  
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 UserPOJO userPOJO=new UserPOJO();
-                userPOJO.setIsadmin(false);
                 userPOJO.setName(name);
                 userPOJO.setPosition(position);
                 userPOJO.setUsername(username);
+                userPOJO.setRole(UserPOJO.Role.USER);
                 String encodedPassword = passwordEncoder.encode(password);
                 userPOJO.setPassword(encodedPassword);
             
@@ -66,7 +68,7 @@ public class Controller {
             String name=(String) request.getSession().getAttribute("user");
             Boolean check=false;
             List<UserPOJO> list=null;
-            if(userPOJOService.adminOrNot(name)){
+            if(userPOJOService.isAdmin(name)){
                 check=true;
                 list=userPOJOService.getAll();
                 
@@ -78,6 +80,13 @@ public class Controller {
                         .addObject("names", list);
         }
 
+        
+        @GetMapping("/sec")
+        @RolesAllowed("ADMIN")
+        public String getMethodName() {
+            return "jhsdghdfhdf";
+        }
+        
         
         
 }

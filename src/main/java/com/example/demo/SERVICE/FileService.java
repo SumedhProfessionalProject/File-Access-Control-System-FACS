@@ -27,13 +27,15 @@ public class FileService {
 
     public List<FilePOJO> getAll(String user){
 
-       if(userRepo.findById(user).orElse(null).isIsadmin()){
+       if(userRepo.findById(user).orElse(null).getRole()==UserPOJO.Role.ADMIN){
             return fileRepo.findAll();
        }
        return fileRepo.findByCreator(user);
     }
 
-    
+    public FilePOJO getFile(String name){
+        return fileRepo.findById(name).orElse(null);
+    }
 
     // public List<String> getCreatorName(){
     //     return fileRepo.findAllCreator();
@@ -42,5 +44,5 @@ public class FileService {
     //     return fileRepo.findAll();
     // }
 
-
+    
 }
