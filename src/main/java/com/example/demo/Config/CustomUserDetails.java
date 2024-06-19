@@ -12,6 +12,7 @@ import com.example.demo.POJOS.UserPOJO;
 
 /**
  * This is for auth 
+ * by default spring boot expects ROLE_<role>
  * @implNote UserDetails
  * authoritize
  */
@@ -26,8 +27,8 @@ public class CustomUserDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        return Collections.singletonList(new SimpleGrantedAuthority(userPOJO.getRole().name()));
+        String role = "ROLE_" + userPOJO.getRole().name();
+        return Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
     @Override

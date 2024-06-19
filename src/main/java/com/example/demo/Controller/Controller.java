@@ -82,8 +82,8 @@ public class Controller {
         }
 
         
-        @GetMapping("/sec")
-        @RolesAllowed("ADMIN")
+        @GetMapping("/secured")
+        @PreAuthorize("hasRole('ROLE_ADMIN')")
         public String getMethodName() {
             return "jhsdghdfhdf";
         }

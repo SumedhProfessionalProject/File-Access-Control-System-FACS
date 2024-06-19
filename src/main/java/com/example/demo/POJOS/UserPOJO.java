@@ -27,7 +27,7 @@ public class UserPOJO {
 
     private String password;
 
-     @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public enum Role {
