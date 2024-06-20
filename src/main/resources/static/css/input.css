@@ -1,0 +1,40 @@
+/* Base styles for input */
+.input-style {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #333;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    background: linear-gradient(45deg, #49a09d, #5f2c82); /* Gradient background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Styles for input on hover */
+  .input-style:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Styles for input on focus */
+  .input-style:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Remove default browser styling */
+  .input-style::-webkit-input-placeholder {
+    color: #bbb;
+  }
+  
+  .input-style::-moz-placeholder {
+    color: #bbb;
+  }
+  
+  .input-style:-ms-input-placeholder {
+    color: #bbb;
+  }
+  
+  .input-style::placeholder {
+    color: #bbb;
+  }
+  

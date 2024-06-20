@@ -1,0 +1,19 @@
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 25px; /* Rounded corners */
+	background: linear-gradient(45deg, #49a09d, #5f2c82); /* Gradient background */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	border: none;
+	cursor: pointer;
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+	background: linear-gradient(45deg, #5f2c82, #49a09d); /* Reverse gradient on hover */
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
