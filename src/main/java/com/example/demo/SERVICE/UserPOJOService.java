@@ -64,6 +64,8 @@ public class UserPOJOService implements UserDetailsService {
         userRepo.save(user);
     }
 
+
+
     
     /**
      * Returbs boolean if Role not admin
@@ -71,10 +73,25 @@ public class UserPOJOService implements UserDetailsService {
      * @return
      * 
      */
+    public boolean checkAdmin(String name,String password){
+        UserPOJO userPojo=userRepo.findById(name).orElse(null);
+       // return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN && userPojo.getPassword().equals(userRepo.) ;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(userPojo.getRole()==UserPOJO.Role.ADMIN){
+            if(
+                passwordEncoder.encode(password).equals(   userRepo.findById(name).get().getPassword()    )     
+                   ){
+                return true;
+            }
+        }     
+        return false;
+   
+    }
+
     public boolean isAdmin(String name){
         UserPOJO userPojo=userRepo.findById(name).orElse(null);
-        return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN;
-        
+        return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN  ;
+
     }
 
     

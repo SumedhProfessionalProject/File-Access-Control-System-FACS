@@ -51,15 +51,8 @@
               </ul>
             </div>
             <div class="main_container">
-                <div >
-                    <p th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</p>
-                </div>
-                <div>
-                  <br>
-                    <form th:action="@{/logout}" method="post">
-                        <button class="button" type="submit" >Sign out</button>
-                    </form>
-                </div>
+                <h1>OOPS!</h1>
+                <h2 th:text="${msg}"></h2>
             </div>
         </div>
        

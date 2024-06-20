@@ -43,7 +43,7 @@ public class Controller {
             ModelAndView modelAndView=new ModelAndView("register");
             modelAndView.addObject("msg", "unsuccess");
             
-            if(userPOJOService.isAdmin(adminusername)){  
+            if(userPOJOService.checkAdmin(adminusername,adminpassword)){  
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 UserPOJO userPOJO=new UserPOJO();
                 userPOJO.setName(name);
