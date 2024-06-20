@@ -78,9 +78,12 @@ public class UserPOJOService implements UserDetailsService {
        // return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN && userPojo.getPassword().equals(userRepo.) ;
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if(userPojo.getRole()==UserPOJO.Role.ADMIN){
+   
             if(
-                passwordEncoder.encode(password).equals(   userRepo.findById(name).get().getPassword()    )     
-                   ){
+                passwordEncoder.matches(password, userRepo.findById(name).get().getPassword())      )     
+                   {
+                  
+                    System.out.println(userRepo.findById(name).get().getPassword() +"\n"+passwordEncoder.encode(password));
                 return true;
             }
         }     
