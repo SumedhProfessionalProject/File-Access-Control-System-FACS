@@ -1,6 +1,65 @@
 <html>
+    <head>
+        <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    </head>
     <body>
-        <h1>OOPS!</h1>
-        <h3 th:text="${msg}"></h3>
+
+        <div class="wrapper" >
+  
+            <div class="top_navbar">
+              <div class="hamburger">
+                 <div class="one"></div>
+                 <div class="two"></div>
+                 <div class="three"></div>
+              </div>
+              <div class="top_menu">
+                <div class="logo">
+                    <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
+                </div>
+                <ul>
+                    <li><a href="/secured">
+                        <img id="try" th:src="@{/icons/lock-solid.svg}">
+                      </a></li>
+                      <li><a href="#">
+                        <img id="try" th:src="@{/icons/bell-solid.svg}">  
+                        </a></li>
+                      <li><a href="#">
+                        <img id="try" th:src="@{/icons/user-regular.svg}">
+                      </a></li>
+                      
+                </ul>
+              </div>
+            </div>
+            
+            <div class="sidebar">
+                <ul>
+                  <li><a href="/file">
+                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                    <span class="title">Files</span>
+                    </a></li>
+                  <!-- <li><a href="/secured">
+                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                    <span class="title">Admin</span>
+                    </a></li> -->
+                  <li><a href="#">
+                    <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
+                    <span class="title">TimeTable</span>
+                    </a></li>
+                  <!-- <li><a href="#" class="active">
+                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                    <span class="title">Profile</span>
+                    </a></li> -->
+                  <li><a href="/logout">
+                    <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
+                    <span class="title">Logout</span>
+                    </a>
+                </li>
+              </ul>
+            </div>
+            <div class="main_container">
+                <h1>OOPS!</h1>
+                <h3 th:text="${msg}"></h3>
+            </div>
+            <script type="text/javascript" th:src="@{/js/nav.js}"></script>
     </body>
 </html>
