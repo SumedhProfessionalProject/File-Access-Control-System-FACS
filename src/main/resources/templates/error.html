@@ -3,7 +3,6 @@
         <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     </head>
     <body>
-
         <div class="wrapper" >
   
             <div class="top_navbar">
@@ -17,6 +16,7 @@
                     <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
                 </div>
                 <ul>
+                 
                     <li><a href="/secured">
                         <img id="try" th:src="@{/icons/lock-solid.svg}">
                       </a></li>
@@ -37,18 +37,12 @@
                     <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
                     <span class="title">Files</span>
                     </a></li>
-                  <!-- <li><a href="/secured">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Admin</span>
-                    </a></li> -->
+                 
                   <li><a href="#">
                     <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
                     <span class="title">TimeTable</span>
                     </a></li>
-                  <!-- <li><a href="#" class="active">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Profile</span>
-                    </a></li> -->
+                 
                   <li><a href="/logout">
                     <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
                     <span class="title">Logout</span>
@@ -57,9 +51,19 @@
               </ul>
             </div>
             <div class="main_container">
-                <h1>OOPS!</h1>
-                <h3 th:text="${msg}"></h3>
+                <div >
+                    <p th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</p>
+                </div>
+                <div>
+                  <br>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="button" type="submit" >Sign out</button>
+                    </form>
+                </div>
             </div>
-            <script type="text/javascript" th:src="@{/js/nav.js}"></script>
+        </div>
+       
+       
+         <script type="text/javascript" th:src="@{/js/nav.js}"></script>
     </body>
 </html>

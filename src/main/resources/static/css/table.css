@@ -1,14 +1,9 @@
 
-body {
-	margin: 0;
-	font-family: sans-serif;
-	font-weight: 100;
-	
-}
+
 
 .container {
 	width: 100%;
-	max-width: 900px; /* Maximum width of the table */
+	max-width: 1000px; /* Maximum width of the table */
 	padding: 20px; /* Add some padding for smaller screens */
 	box-sizing: border-box; /* Include padding in the element's total width and height */
 }

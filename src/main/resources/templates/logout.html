@@ -7,6 +7,7 @@
     <head>
         <title>Logout</title>
         <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+        <link th:href="@{/css/buttonCss.css}" rel="stylesheet" />
 
     </head>
     <body>
@@ -24,15 +25,7 @@
                     <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
                 </div>
                 <ul>
-                  <!-- <li><a href="#">
-                   <i> <img th:src="@{/icons/file-regular.svg}"></i>
-                    </a></li>
-                  <li><a href="#">
-                    <i class="fas fa-bell"></i>
-                    </a></li>
-                  <li><a href="#">
-                    <img th:src="@{/icons/file-regular.svg}">
-                    </a></li> -->
+                 
                     <li><a href="/secured">
                         <img id="try" th:src="@{/icons/lock-solid.svg}">
                       </a></li>
@@ -53,18 +46,12 @@
                     <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
                     <span class="title">Files</span>
                     </a></li>
-                  <!-- <li><a href="/secured">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Admin</span>
-                    </a></li> -->
+                 
                   <li><a href="#">
                     <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
                     <span class="title">TimeTable</span>
                     </a></li>
-                  <!-- <li><a href="#" class="active">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Profile</span>
-                    </a></li> -->
+                 
                   <li><a href="/logout">
                     <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
                     <span class="title">Logout</span>
@@ -77,8 +64,9 @@
                     <p th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</p>
                 </div>
                 <div>
+                  <br>
                     <form th:action="@{/logout}" method="post">
-                        <input type="submit" value="Sign Out"/>
+                        <button class="button" type="submit" >Sign out</button>
                     </form>
                 </div>
             </div>
