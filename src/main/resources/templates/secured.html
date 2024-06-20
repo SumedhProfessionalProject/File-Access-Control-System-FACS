@@ -4,85 +4,98 @@
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head>
-        <title>Logout</title>
-        <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+<head>
+    <title>Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-    </head>
-    <body>
+        .top_navbar {
+            width: 100%;
+            background-color: #201e51;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: #fff;
+        }
 
-        <div class="wrapper" >
-  
-            <div class="top_navbar">
-              <div class="hamburger">
-                 <div class="one"></div>
-                 <div class="two"></div>
-                 <div class="three"></div>
-              </div>
-              <div class="top_menu">
-                <div class="logo">
-                    <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
-                </div>
-                <ul>
-                  <!-- <li><a href="#">
-                   <i> <img th:src="@{/icons/file-regular.svg}"></i>
-                    </a></li>
-                  <li><a href="#">
-                    <i class="fas fa-bell"></i>
-                    </a></li>
-                  <li><a href="#">
-                    <img th:src="@{/icons/file-regular.svg}">
-                    </a></li> -->
-                    <li><a href="/secured">
-                        <img id="try" th:src="@{/icons/lock-solid.svg}">
-                      </a></li>
-                      <li><a href="#">
-                        <img id="try" th:src="@{/icons/bell-solid.svg}">  
-                        </a></li>
-                      <li><a href="#">
-                        <img id="try" th:src="@{/icons/user-regular.svg}">
-                      </a></li>
-                      
-                </ul>
-              </div>
-            </div>
-            
-            <div class="sidebar">
-                <ul>
-                  <li><a href="/file">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Files</span>
-                    </a></li>
-                  <!-- <li><a href="/secured">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Admin</span>
-                    </a></li> -->
-                  <li><a href="#">
-                    <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
-                    <span class="title">TimeTable</span>
-                    </a></li>
-                  <!-- <li><a href="#" class="active">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Profile</span>
-                    </a></li> -->
-                  <li><a href="/logout">
-                    <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
-                    <span class="title">Logout</span>
-                    </a>
-                </li>
-              </ul>
-            </div>
-            <div class="main_container">
-                <p th:text="${msg}"></p>
-            </div>
-        </div>
-       
+        .top_navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
 
+        .top_navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
 
-        <!-- <h1 th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form> -->
-        <script type="text/javascript" th:src="@{/js/nav.js}"></script>
-    </body>
+        .top_navbar ul li {
+            margin-left: 20px;
+        }
+
+        .top_navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .top_navbar ul li a:hover {
+            background-color: #112c97;
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .main_container {
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .main_container p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top_navbar">
+    <div class="logo">
+        <span th:remove="tag" sec:authentication="name">Manager Sumedh</span> 
+    </div>
+    <ul>
+        <li><a href="/secured">
+            <img id="try" th:src="@{/icons/lock-solid.svg}">Secured
+        </a></li>
+        <li><a href="#">
+            <img id="try" th:src="@{/icons/bell-solid.svg}">Notifications
+        </a></li>
+        <li><a href="#">
+            <img id="try" th:src="@{/icons/user-regular.svg}">Profile
+        </a></li>
+        <li><a href="/logout">
+            <img id="try" th:src="@{/icons/right-from-bracket-solid.svg}">Logout
+        </a></li>
+    </ul>
+</div>
+
+<div class="main_container">
+    <p th:text="${msg}"></p>
+</div>
+
+<script type="text/javascript" th:src="@{/js/nav.js}"></script>
+</body>
 </html>

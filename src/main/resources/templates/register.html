@@ -1,21 +1,106 @@
 <html>
-    <!---
+<!---
     Registration ka page hai
     form ke 2 section hai
     1)section: new user ka detail
     2) section : admin ka password or username agar sahi hai to user registered
     ###NAME ATTRIBUTE KO HAAT MAAT LEGANA BHAI!####
     -->
-    <body>
-        <form th:action="@{/registerhtml}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><label> name: <input type="text" name="name"/> </label></div>
-            <div><label> position: <input type="text" name="position"/> </label></div>
-            <hr>
-            <div><label> User Name : <input type="text" name="adminusername"/> </label></div>
-            <div><label> Password: <input type="password" name="adminpassword"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <form th:action="@{/registerhtml}" method="post">
+        <div>
+            <label> User Name: </label>
+            <input type="text" name="username" />
+        </div>
+        <div>
+            <label> Password: </label>
+            <input type="password" name="password" />
+        </div>
+        <div>
+            <label> Name: </label>
+            <input type="text" name="name" />
+        </div>
+        <div>
+            <label> Position: </label>
+            <input type="text" name="position" />
+        </div>
+        <hr>
+        <div>
+            <label> Admin User Name: </label>
+            <input type="text" name="adminusername" />
+        </div>
+        <div>
+            <label> Admin Password: </label>
+            <input type="password" name="adminpassword" />
+        </div>
+        <div>
+            <input type="submit" value="Sign In" />
+        </div>
+    </form>
+</body>
+
 </html>
