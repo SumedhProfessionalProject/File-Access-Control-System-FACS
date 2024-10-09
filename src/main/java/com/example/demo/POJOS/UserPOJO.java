@@ -1,39 +1,48 @@
 package com.example.demo.POJOS;
 
+import jakarta.persistence.*;
+import lombok.*;
 import org.apache.catalina.User;
 
 import java.util.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import lombok.Data;
 
 /**
  * User POJO
  * @author
  *    sumedh
  */
-@Entity(name="users")
+@Entity
+@Table(name="users")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserPOJO {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @NonNull
+    @Column(unique = true)
     private String username;
 
-    private String name;
-
-    private String position;
-
+    @Column
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @NonNull
+    @Column
+    private String roles;
 
-    public enum Role {
-        ADMIN,
-        USER,
-        READ
-    }
-    
+    @NonNull
+    @Column
+    private String name;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column
+    private String admin_id;
+
+
 }

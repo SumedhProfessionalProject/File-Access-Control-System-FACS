@@ -43,22 +43,22 @@ public class Controller {
             ModelAndView modelAndView=new ModelAndView("register");
             modelAndView.addObject("msg", "unsuccess");
             
-            if(userPOJOService.checkAdmin(adminusername,adminpassword)){  
-                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                UserPOJO userPOJO=new UserPOJO();
-                userPOJO.setName(name);
-                userPOJO.setPosition(position);
-                userPOJO.setUsername(username);
-                userPOJO.setRole(UserPOJO.Role.USER);
-                String encodedPassword = passwordEncoder.encode(password);
-                userPOJO.setPassword(encodedPassword);
-            
-                userPOJOService.save(userPOJO);
-                passwordEncoder=null;
-                userPOJO=null;
-                modelAndView.addObject("msg", "success");
-            }
-            
+//            if(userPOJOService.checkAdmin(adminusername,adminpassword)){
+//                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//                UserPOJO userPOJO=new UserPOJO();
+//                userPOJO.setName(name);
+//                userPOJO.setPosition(position);
+//                userPOJO.setUsername(username);
+//                userPOJO.setRole(UserPOJO.Role.USER);
+//                String encodedPassword = passwordEncoder.encode(password);
+//                userPOJO.setPassword(encodedPassword);
+//
+//                userPOJOService.save(userPOJO);
+//                passwordEncoder=null;
+//                userPOJO=null;
+//                modelAndView.addObject("msg", "success");
+//            }
+//
             return modelAndView;
             
             

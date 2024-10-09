@@ -2,16 +2,8 @@ package com.example.demo.SERVICE;
 
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User.UserBuilder;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Config.CustomUserDetails;
 import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.REPOS.UserRepo;
 
@@ -30,36 +22,13 @@ import com.example.demo.REPOS.UserRepo;
  */
 
 @Service
-public class UserPOJOService implements UserDetailsService {
+public class UserPOJOService  {
   
     @Autowired
     private UserRepo userRepo;
 
-    /**
-     * loads username directly used by auth spring
-     */
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserPOJO user = userRepo.findById(username).orElse(null);
-        CustomUserDetails customUserDetails=new CustomUserDetails(user);
-        
-        System.out.println("hydsahfgbhsjdfjsdgbhf");
-        if (user == null ) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        System.out.println("hydsahfgbhsjdfjsdgbhf");
-        if(user.getRole()==UserPOJO.Role.ADMIN){
-            
-            return customUserDetails;
 
 
-        }else{
-            return customUserDetails;
-        }
-        
-        
-    }
-    
     public void save(UserPOJO user){
         userRepo.save(user);
     }
@@ -73,33 +42,37 @@ public class UserPOJOService implements UserDetailsService {
      * @return
      * 
      */
-    public boolean checkAdmin(String name,String password){
-        UserPOJO userPojo=userRepo.findById(name).orElse(null);
-       // return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN && userPojo.getPassword().equals(userRepo.) ;
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        if(userPojo.getRole()==UserPOJO.Role.ADMIN){
-   
-            if(
-                passwordEncoder.matches(password, userRepo.findById(name).get().getPassword())      )     
-                   {
-                  
-                    System.out.println(userRepo.findById(name).get().getPassword() +"\n"+passwordEncoder.encode(password));
-                return true;
-            }
-        }     
-        return false;
-   
-    }
+//    public boolean checkAdmin(String name,String password){
+//        UserPOJO userPojo=userRepo.findById(name).orElse(null);
+//       // return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN && userPojo.getPassword().equals(userRepo.) ;
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        if(userPojo.getRole()==UserPOJO.Role.ADMIN){
+//
+//            if(
+//                passwordEncoder.matches(password, userRepo.findById(name).get().getPassword())      )
+//                   {
+//
+//                    System.out.println(userRepo.findById(name).get().getPassword() +"\n"+passwordEncoder.encode(password));
+//                return true;
+//            }
+//        }
+//        return false;
+//
+//    }
 
     public boolean isAdmin(String name){
         UserPOJO userPojo=userRepo.findById(name).orElse(null);
-        return userPojo !=null && userPojo.getRole() == UserPOJO.Role.ADMIN  ;
+        return userPojo !=null && userPojo.getRoles().equals("ROLE_ADMIN") ;
 
     }
 
     
     public List<UserPOJO> getAll(){
         return userRepo.findAll();
+    }
+
+    public boolean adminPresent(){
+        return userRepo.existsAdminUser();
     }
 
 }

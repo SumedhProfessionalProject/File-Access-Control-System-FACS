@@ -36,7 +36,7 @@ public class FileService {
      */
     public List<FilePOJO> getAll(String user){
 
-       if(userRepo.findById(user).orElse(null).getRole()==UserPOJO.Role.ADMIN){
+       if(userRepo.findById(user).orElse(null).getRoles().equals("ROLE_ADMIN")){
             return fileRepo.findAll();
        }
        return fileRepo.findByCreator(user);
