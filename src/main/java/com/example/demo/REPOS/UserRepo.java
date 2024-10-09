@@ -22,4 +22,5 @@ public interface UserRepo extends JpaRepository<UserPOJO,String>{
     @Query("SELECT COUNT(u) > 0 FROM UserPOJO u WHERE u.roles = 'ROLE_ADMIN'")
     boolean existsAdminUser();
 
+
 }

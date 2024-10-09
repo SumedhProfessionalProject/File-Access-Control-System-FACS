@@ -6,7 +6,8 @@
     FILE UPLOAD AND FILE KA TABLE
 
 -->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <title>Spring Security Example</title>
        
@@ -21,7 +22,7 @@
   
             <div class="top_navbar">
               <div class="hamburger">
-                 <div class="one"></div>
+                 <div sec:authorize="hasRole('ROLE_ADMIN')" class="one"></div>
                  <div class="two"></div>
                  <div class="three"></div>
               </div>
@@ -30,7 +31,7 @@
                     <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
                 </div>
                 <ul>
-                    <li><a href="/secured">
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">
                         <img id="try" th:src="@{/icons/lock-solid.svg}">
                       </a></li>
                       <li><a href="#">
@@ -50,10 +51,7 @@
                     <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
                     <span class="title">Files</span>
                     </a></li>
-                  <!-- <li><a href="/secured">
-                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                    <span class="title">Admin</span>
-                    </a></li> -->
+
                   <li><a href="#">
                     <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
                     <span class="title">TimeTable</span>
@@ -62,6 +60,8 @@
                     <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
                     <span class="title">Profile</span>
                     </a></li> -->
+
+
                   <li><a href="/logout">
                     <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
                     <span class="title">Logout</span>
@@ -102,13 +102,14 @@
                     </thead>
                     <tbody >
                      <tr th:each="file: ${files}" >
-                        <td th:text="${file.filename}"></td>
+                         <td>Hello world!</td>
+                        <td th:text="${file.getName()}"></td>
                         <td th:text="${file.name}"></td>
                         <td th:text="${file.contentType}"></td>
                         <td th:text="${file.date}"></td>
                         <td th:text="${file.creator}"></td>
                         <td><form action="/download">
-                            <button class="button" type="submit" th:value="${file.name}" name="download">Dowload</button>
+                            <button class="button" type="submit" th:value="${file.getId()}" name="download">Dowload</button>
                         </form></td>
                     </tr>
                      

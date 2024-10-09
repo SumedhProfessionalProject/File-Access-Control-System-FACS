@@ -1,6 +1,8 @@
 package com.example.demo.Controller;
 
 import java.util.*;
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,63 +33,21 @@ public class Controller {
         @Autowired
         private FileService fileService;
 
-        @PostMapping("/registerhtml")
-        public ModelAndView processRegister(@RequestParam String username,
-                                            @RequestParam String password,
-                                            @RequestParam String name,
-                                            @RequestParam String position,
-                                            @RequestParam String adminusername,
-                                            @RequestParam String adminpassword
-                                    ) {
-
-            ModelAndView modelAndView=new ModelAndView("register");
-            modelAndView.addObject("msg", "unsuccess");
-            
-//            if(userPOJOService.checkAdmin(adminusername,adminpassword)){
-//                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//                UserPOJO userPOJO=new UserPOJO();
-//                userPOJO.setName(name);
-//                userPOJO.setPosition(position);
-//                userPOJO.setUsername(username);
-//                userPOJO.setRole(UserPOJO.Role.USER);
-//                String encodedPassword = passwordEncoder.encode(password);
-//                userPOJO.setPassword(encodedPassword);
-//
-//                userPOJOService.save(userPOJO);
-//                passwordEncoder=null;
-//                userPOJO=null;
-//                modelAndView.addObject("msg", "success");
-//            }
-//
-            return modelAndView;
-            
-            
+        @GetMapping("/gallery")
+        public ModelAndView getImgs(){
+                return new ModelAndView("gallery").addObject("imgs",fileService.getGallery());
         }
 
-        @GetMapping({"/file","/"})
-        public ModelAndView getMethodName(HttpServletRequest request) {
-            String name=(String) request.getSession().getAttribute("user");
-            Boolean check=false;
-            List<UserPOJO> list=null;
-            if(userPOJOService.isAdmin(name)){
-                check=true;
-                list=userPOJOService.getAll();
-                
-            }
-            return new ModelAndView("file")
-                        .addObject("name", name)
-                        .addObject("files", fileService.getAll(name))
-                        .addObject("admin", check)
-                        .addObject("names", list);
+        @GetMapping("/file")
+        public ModelAndView modelAndView(HttpSession session){
+
+                return new ModelAndView("file").addObject("files",fileService.getAll((String) session.getAttribute("id")));
         }
 
-        
-        @GetMapping("/secured")
-        @PreAuthorize("hasRole('ROLE_ADMIN')")
-        public ModelAndView getMethodName() {
-            return new ModelAndView("secured").addObject("msg", "secured");
+        @GetMapping("/login")
+        public ModelAndView getImgslogim(){
+                return new ModelAndView("login");
         }
-        
-        
+
         
 }

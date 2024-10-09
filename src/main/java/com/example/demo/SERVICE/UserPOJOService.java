@@ -33,7 +33,10 @@ public class UserPOJOService  {
         userRepo.save(user);
     }
 
+    public boolean isUsernamePresent(String username){
 
+        return userRepo.findByUsername(username).isEmpty();
+    }
 
     
     /**
@@ -74,5 +77,6 @@ public class UserPOJOService  {
     public boolean adminPresent(){
         return userRepo.existsAdminUser();
     }
+
 
 }

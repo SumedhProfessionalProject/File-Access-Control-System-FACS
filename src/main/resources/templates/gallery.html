@@ -1,0 +1,7 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    <table th:each="file : ${imgs}">
+        <tr>  <img th:src="'data:' + ${file.getContentType()} + ';base64,' + ${file.getFile()}" alt="Image" /></tr>
+    </table>
+</body>
+</html>

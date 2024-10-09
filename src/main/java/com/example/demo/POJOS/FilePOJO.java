@@ -1,9 +1,6 @@
 package com.example.demo.POJOS;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.Data;
 
 /**
@@ -11,12 +8,15 @@ import lombok.Data;
  * @author
  *    sumedh
  */
-@Entity(name="filemanager")
+@Entity
+@Table(name="filemanager")
 @Data
 public class FilePOJO {
     
     @Id
-    @Column(name="name")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
     private String name;
 
     private String filename;
@@ -24,12 +24,15 @@ public class FilePOJO {
     private String date;
 
     @Lob
-    private byte[] file;
+    @Column(columnDefinition = "LONGBLOB")
+    private String file;
 
     private String creator;
 
-    @Column(name = "contenttype")
+
     private String contentType;
+
+
 
 
 }

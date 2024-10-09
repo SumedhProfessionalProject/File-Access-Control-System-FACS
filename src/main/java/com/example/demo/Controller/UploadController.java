@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,10 +53,10 @@ public class UploadController {
 
         FilePOJO filePOJO=new FilePOJO();
         filePOJO.setContentType(file.getContentType());
-        filePOJO.setCreator((String)session.getAttribute("user"));
+        filePOJO.setCreator((String)session.getAttribute("id"));
         filePOJO.setFilename(name);
         filePOJO.setDate(latestDate());
-        filePOJO.setFile(file.getBytes());
+        filePOJO.setFile(Base64.getEncoder().encodeToString(file.getBytes()));
         filePOJO.setName(file.getOriginalFilename());
 
         fileService.add(filePOJO);

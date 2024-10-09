@@ -3,6 +3,7 @@ package com.example.demo.SERVICE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.*;
 
 import com.example.demo.POJOS.FilePOJO;
@@ -34,16 +35,18 @@ public class FileService {
      * @param user
      * @return List<FilePOJO>
      */
-    public List<FilePOJO> getAll(String user){
+    public List<FilePOJO> getAll(String id){
 
-       if(userRepo.findById(user).orElse(null).getRoles().equals("ROLE_ADMIN")){
-            return fileRepo.findAll();
-       }
-       return fileRepo.findByCreator(user);
+
+       return fileRepo.getData(id);
     }
 
     public FilePOJO getFile(String name){
         return fileRepo.findById(name).orElse(null);
+    }
+
+    public List<FilePOJO> getGallery(){
+        return fileRepo.getImages();
     }
 
 

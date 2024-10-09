@@ -7,6 +7,9 @@
 <head>
     <title>secured</title>
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{/css/table.css}" rel="stylesheet" />
+    <link th:href="@{/css/buttonCss.css}" rel="stylesheet" />
+    <link th:href="@{/css/input.css}" rel="stylesheet" />
 </head>
 <body>
     <div class="wrapper" >
@@ -39,9 +42,9 @@
         
         <div class="sidebar">
             <ul>
-              <li><a href="/file">
+              <li><a href="/admin/add">
                 <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                <span class="title">Files</span>
+                <span class="title">Add user</span>
                 </a></li>
              
               <li><a href="#">
@@ -57,10 +60,36 @@
           </ul>
         </div>
         <div class="main_container">
-          
-                <p th:text="${msg}"></p>
-            
+
+            <div class="container">
+                <table >
+                    <thead >
+                    <tr>
+                        <th>User</th>
+                        <th>Name</th>
+                        <th>Email</th>
+
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <tr th:each="user: ${users}" >
+                        <td th:text="${user.getUsername()}"></td>
+                        <td th:text="${user.getName()}"></td>
+                        <td th:text="${user.getEmail()}"></td>
+
+<!--                        <td><form action="/download">-->
+<!--                            <button class="button" type="submit" th:value="${user.getId()}" name="download">Dowload</button>-->
+<!--                        </form></td>-->
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
+
     </div>
    
 
