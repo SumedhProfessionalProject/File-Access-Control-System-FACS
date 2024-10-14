@@ -21,4 +21,19 @@ public interface FileRepo extends JpaRepository<FilePOJO,String>{
 
     @Query("SELECT f FROM FilePOJO f WHERE f.creator=:id")
     List<FilePOJO> getData(@Param("id") String id);
+
+    @Query("SELECT COUNT(*) FROM FilePOJO f WHERE f.creator=:id")
+    Integer getInetgerData(@Param("id") String id);
+
+    @Query("SELECT COUNT(*) FROM FilePOJO f WHERE f.creator=:id AND f.contentType LIKE 'image%'")
+    Integer getNumberOfImages(@Param("id") String id);
+
+    @Query("SELECT COUNT(*) FROM FilePOJO f WHERE f.creator=:id AND f.contentType='application/pdf'")
+    Integer getNumberOfPDFS(@Param("id") String id);
+
+    @Query("SELECT COUNT(*) FROM FilePOJO f WHERE f.creator=:id AND f.contentType LIKE 'video%'")
+    Integer getNumberOfVideo(@Param("id") String id);
+
+
+
 }

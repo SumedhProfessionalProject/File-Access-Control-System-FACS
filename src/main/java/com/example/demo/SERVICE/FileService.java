@@ -60,6 +60,22 @@ public class FileService {
         fileRepo.deleteById(id);
     }
 
+    public HashMap<String,Integer> getInfo(String id){
+        HashMap<String,Integer> hashMap=new HashMap<>();
+        Integer img=fileRepo.getNumberOfImages(id);
+        Integer pdf=fileRepo.getNumberOfPDFS(id);
+        Integer video=fileRepo.getNumberOfVideo(id);
+        Integer sum=img+pdf+video;
+
+        Integer others=fileRepo.getInetgerData(id);
+        others=others > sum ? others-sum : 0;
+
+        hashMap.put("image",img);
+        hashMap.put("pdf",fileRepo.getNumberOfPDFS(id));
+        hashMap.put("video",fileRepo.getNumberOfVideo(id));
+        hashMap.put("other",others);
+        return hashMap;
+    }
 
 
 
