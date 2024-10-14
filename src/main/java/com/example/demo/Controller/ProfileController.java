@@ -17,6 +17,7 @@ public class ProfileController {
     @Autowired
     private UserPOJOService userPOJOService;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 
@@ -31,14 +32,15 @@ public class ProfileController {
 
     @PostMapping("/profile")
     public ModelAndView post(
-            @RequestParam(value = "password",required = false) String password,
+            @RequestParam(value = "password") String password,
             HttpSession session
     ){
         UserPOJO userPOJO=userPOJOService.getUser((String) session.getAttribute("id"));
 
-        if(!password.isEmpty()){
-            userPOJO.setPassword(passwordEncoder.encode(password));
-        }
+
+        userPOJO.setPassword(passwordEncoder.encode(password));
+
+        userPOJOService.save(userPOJO);
 
         return new ModelAndView("redirect:/profile");
 

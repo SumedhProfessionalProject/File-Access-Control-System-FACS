@@ -27,7 +27,7 @@
 
     <div class="top_navbar">
         <div class="hamburger">
-            <div sec:authorize="hasRole('ROLE_ADMIN')" class="one"></div>
+            <div class="one"></div>
             <div class="two"></div>
             <div class="three"></div>
         </div>
@@ -36,6 +36,7 @@
                 <span th:remove="tag" sec:authentication="name">thymeleaf</span>
             </div>
             <ul>
+
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">
                     <img id="try" th:src="@{/icons/lock-solid.svg}">
                 </a></li>
@@ -52,20 +53,15 @@
 
     <div class="sidebar">
         <ul>
-            <li><a href="/file">
+            <li><a href="/admin/add">
                 <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                <span class="title">Files</span>
+                <span class="title">Add user</span>
             </a></li>
 
             <li><a href="/gallery">
                 <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
                 <span class="title">Gallery</span>
             </a></li>
-            <!-- <li><a href="#" class="active">
-              <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-              <span class="title">Profile</span>
-              </a></li> -->
-
 
             <li><a href="/logout">
                 <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
@@ -74,6 +70,7 @@
             </li>
         </ul>
     </div>
+
     <div class="main_container">
 <!--    <table  align="center" th:each="file : ${imgs}">-->
 <!--        <tr>  <img th:src="'data:' + ${file.getContentType()} + ';base64,' + ${file.getFile()}"  alt="Image" style="max-width: 500px; max-height: 500px;" /></tr>-->
@@ -81,9 +78,10 @@
         <div class="image-gallery">
             <div th:each="file : ${imgs}">
                 <img th:src="'data:' + ${file.getContentType()} + ';base64,' + ${file.getFile()}"
-                     alt="Image" />
+                     alt="Image"  href=""/>
             </div>
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/js/nav.js}"></script>
 </body>
 </html>

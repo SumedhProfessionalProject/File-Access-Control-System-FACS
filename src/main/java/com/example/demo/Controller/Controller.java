@@ -30,8 +30,10 @@ public class Controller {
         private FileService fileService;
 
         @GetMapping("/gallery")
-        public ModelAndView getImgs(){
-                return new ModelAndView("gallery").addObject("imgs",fileService.getGallery());
+        public ModelAndView getImgs(HttpSession session){
+                return new ModelAndView("gallery").addObject("imgs",fileService.getAll(
+                        (String) session.getAttribute("id")
+                ));
         }
 
         @GetMapping("/file")

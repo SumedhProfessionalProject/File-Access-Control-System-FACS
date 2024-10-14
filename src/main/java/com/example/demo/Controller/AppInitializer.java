@@ -28,7 +28,6 @@ public class AppInitializer implements CommandLineRunner {
             UserPOJO userPOJO= UserPOJO.builder()
                     .roles("ROLE_ADMIN")
                     .email("xyz@gmail.com")
-                    .admin_id(null)
                     .name("admin")
                     .password(passwordEncoder.encode("admin"))
                     .username("admin")

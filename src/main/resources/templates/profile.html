@@ -26,7 +26,7 @@
             </div>
             <ul>
 
-                <li><a href="/secured">
+                <li sec:authorize="hasRole('ROLE_ADMIN')" ><a href="/secured">
                     <img id="try" th:src="@{/icons/lock-solid.svg}">
                 </a></li>
                 <li><a href="#">
@@ -42,7 +42,7 @@
 
     <div class="sidebar">
         <ul>
-            <li><a href="/admin/add">
+            <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin/add">
                 <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
                 <span class="title">Add user</span>
             </a></li>
@@ -62,6 +62,11 @@
     <div class="main_container">
 
         <div class="container">
+            <form action="/profile" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <input type="text" name="password"/>
+                <button class="button" type="submit">set password</button>
+            </form>
             <table >
                 <thead >
                 <tr>
@@ -83,6 +88,7 @@
 
                 </tbody>
             </table>
+
         </div>
 
 

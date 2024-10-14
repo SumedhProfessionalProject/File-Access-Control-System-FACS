@@ -16,11 +16,14 @@ public interface UserRepo extends JpaRepository<UserPOJO,String>{
 
     Optional<UserPOJO> findByUsername(String username);
 
-    @Query("SELECT u FROM UserPOJO u WHERE u.admin_id = :adminId")
-    List<UserPOJO> findUsernamesByAdminId(@Param("adminId") String adminId);
+//    @Query("SELECT u FROM UserPOJO u WHERE u.admin_id = :adminId")
+//    List<UserPOJO> findUsernamesByAdminId(@Param("adminId") String adminId);
 
     @Query("SELECT COUNT(u) > 0 FROM UserPOJO u WHERE u.roles = 'ROLE_ADMIN'")
     boolean existsAdminUser();
+
+    @Query("SELECT COUNT(u) > 0 FROM UserPOJO u WHERE u.id= :id AND u.roles = 'ROLE_ADMIN' ")
+    boolean isAdmin(@Param("id") String id);
 
 
 }

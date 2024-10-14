@@ -37,8 +37,15 @@ public class FileService {
      */
     public List<FilePOJO> getAll(String id){
 
+        if(userRepo.isAdmin(id)){
 
-       return fileRepo.getData(id);
+            return fileRepo.findAll();
+        }else{
+
+            return fileRepo.getData(id);
+        }
+
+
     }
 
     public FilePOJO getFile(String name){
@@ -52,6 +59,8 @@ public class FileService {
     public void del(String id){
         fileRepo.deleteById(id);
     }
+
+
 
 
     

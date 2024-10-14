@@ -74,6 +74,8 @@ public class UserPOJOService  {
         return userRepo.findAll();
     }
 
+
+
     public boolean adminPresent(){
         return userRepo.existsAdminUser();
     }

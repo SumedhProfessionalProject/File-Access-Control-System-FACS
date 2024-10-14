@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     </head>
@@ -17,7 +17,7 @@
                 </div>
                 <ul>
                  
-                    <li><a href="/secured">
+                    <li><a  sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">
                         <img id="try" th:src="@{/icons/lock-solid.svg}">
                       </a></li>
                       <li><a href="#">

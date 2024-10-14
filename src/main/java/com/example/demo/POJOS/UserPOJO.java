@@ -41,8 +41,7 @@ public class UserPOJO {
     @Column(unique = true)
     private String email;
 
-    @Column
-    private String admin_id;
+
 
 
 }
