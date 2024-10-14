@@ -49,6 +49,10 @@ public class FileService {
         return fileRepo.getImages();
     }
 
+    public void del(String id){
+        fileRepo.deleteById(id);
+    }
+
 
     
 }

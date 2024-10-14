@@ -32,7 +32,7 @@
                 <li><a href="#">
                     <img id="try" th:src="@{/icons/bell-solid.svg}">
                 </a></li>
-                <li><a href="#">
+                <li><a href="/profile">
                     <img id="try" th:src="@{/icons/user-regular.svg}">
                 </a></li>
 
@@ -42,9 +42,9 @@
 
     <div class="sidebar">
         <ul>
-            <li><a href="/file">
+            <li><a href="/admin/add">
                 <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
-                <span class="title">Files</span>
+                <span class="title">Add user</span>
             </a></li>
 
             <li><a href="/gallery">
@@ -52,18 +52,43 @@
                 <span class="title">Gallery</span>
             </a></li>
 
+            <li><a href="/logout">
+                <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
+                <span class="title">Logout</span>
+            </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main_container">
 
-        <div th:if="${msg!=null}">
-            <p th:text="${msg}"></p>
+        <div class="container">
+            <table >
+                <thead >
+                <tr>
+                    <th>User</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
 
+                </tr>
+                </thead>
+                <tbody >
+                <tr>
+                    <td th:text="${profile.getName()}"></td>
+                    <td th:text="${profile.getUsername()}"></td>
+                    <td th:text="${profile.getName()}"></td>
+                    <td th:text="${profile.getEmail()}"></td>
+                </tr>
+
+
+                </tbody>
+            </table>
         </div>
-            <div class="main_container">
-
-                <div class="container">
 
 
-             </div>
-            </div>
+    </div>
+
+</div>
 
 
 

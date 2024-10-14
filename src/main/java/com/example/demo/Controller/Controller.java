@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.POJOS.FilePOJO;
@@ -21,9 +19,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
-
+@SessionAttributes("user")
 @RestController
 public class Controller {
 
@@ -49,5 +45,11 @@ public class Controller {
                 return new ModelAndView("login");
         }
 
+        @PostMapping("/file/del")
+        public ModelAndView deleteTheFile(@RequestParam String id){
+                System.out.println(id);
+                fileService.del(id);
+                return new ModelAndView("redirect:/file");
+        }
         
 }

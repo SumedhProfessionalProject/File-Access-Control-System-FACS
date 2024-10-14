@@ -25,6 +25,17 @@
 	color: #fff;
 	word-break: break-word; /* Ensure long words break to fit in cells */
 }
+.downloadbtn{
+    width:180px;
+}
+
+.filecol{
+    width:180px;
+}
+
+.button{
+    align:center;
+}
 
 .container th {
 	text-align: left;

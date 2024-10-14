@@ -78,5 +78,11 @@ public class UserPOJOService  {
         return userRepo.existsAdminUser();
     }
 
+    public UserPOJO getUser(String id){
+        return userRepo.findById(id).orElseThrow(()->new RuntimeException("Username not found"));
+    }
+
+
+
 
 }
