@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+    logout hota hai edhar se dont do anything to the form for now
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <title>Logout</title>
+        <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+        <link th:href="@{/css/buttonCss.css}" rel="stylesheet" />
+
+    </head>
+    <body>
+
+        <div class="wrapper" >
+  
+            <div class="top_navbar">
+              <div class="hamburger">
+                 <div class="one"></div>
+                 <div class="two"></div>
+                 <div class="three"></div>
+              </div>
+              <div class="top_menu">
+                <div class="logo">
+                    <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
+                </div>
+                <ul>
+                 
+                    <li><a href="/secured">
+                        <img id="try" th:src="@{/icons/lock-solid.svg}">
+                      </a></li>
+                      <li><a href="#">
+                        <img id="try" th:src="@{/icons/bell-solid.svg}">  
+                        </a></li>
+                      <li><a href="#">
+                        <img id="try" th:src="@{/icons/user-regular.svg}">
+                      </a></li>
+                      
+                </ul>
+              </div>
+            </div>
+            
+            <div class="sidebar">
+                <ul>
+                  <li><a href="/file">
+                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                    <span class="title">Files</span>
+                    </a></li>
+                 
+                  <li><a href="#">
+                    <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
+                    <span class="title">TimeTable</span>
+                    </a></li>
+                 
+                  <li><a href="/logout">
+                    <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
+                    <span class="title">Logout</span>
+                    </a>
+                </li>
+              </ul>
+            </div>
+            <div class="main_container">
+                <div >
+                    <p th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</p>
+                </div>
+                <div>
+                  <br>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="button" type="submit" >Sign out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+       
+
+
+        <!-- <h1 th:inline="text">Logout as <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form> -->
+        <script type="text/javascript" th:src="@{/js/nav.js}"></script>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+    logout hota hai edhar se dont do anything to the form for now
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>secured</title>
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{/css/table.css}" rel="stylesheet" />
+    <link th:href="@{/css/buttonCss.css}" rel="stylesheet" />
+    <link th:href="@{/css/input.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper" >
+
+    <div class="top_navbar">
+        <div class="hamburger">
+            <div class="one"></div>
+            <div class="two"></div>
+            <div class="three"></div>
+        </div>
+        <div class="top_menu">
+            <div class="logo">
+                <span th:remove="tag" sec:authentication="name">thymeleaf</span>
+            </div>
+            <ul>
+
+                <li sec:authorize="hasRole('ROLE_ADMIN')" ><a href="/secured">
+                    <img id="try" th:src="@{/icons/lock-solid.svg}">
+                </a></li>
+                <li><a href="#">
+                    <img id="try" th:src="@{/icons/bell-solid.svg}">
+                </a></li>
+                <li><a href="/profile">
+                    <img id="try" th:src="@{/icons/user-regular.svg}">
+                </a></li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin/add">
+                <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                <span class="title">Add user</span>
+            </a></li>
+
+            <li><a href="/gallery">
+                <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
+                <span class="title">Gallery</span>
+            </a></li>
+
+            <li><a href="/logout">
+                <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
+                <span class="title">Logout</span>
+            </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main_container">
+
+        <div class="container">
+            <form action="/profile" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <input type="text" name="password"/>
+                <button class="button" type="submit">set password</button>
+            </form>
+            <table >
+                <thead >
+                <tr>
+                    <th>User</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+
+                </tr>
+                </thead>
+                <tbody >
+                <tr>
+                    <td th:text="${profile.getName()}"></td>
+                    <td th:text="${profile.getUsername()}"></td>
+                    <td th:text="${profile.getName()}"></td>
+                    <td th:text="${profile.getEmail()}"></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+<script type="text/javascript" th:src="@{/js/nav.js}"></script>
+</body>
+</html>

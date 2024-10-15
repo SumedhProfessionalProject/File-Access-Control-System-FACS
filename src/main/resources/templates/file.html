@@ -1,18 +1,132 @@
 <!DOCTYPE html>
 
-<!---
-    EDHAR VO FILE KA BANADE
-
-    FILE UPLOAD AND FILE KA TABLE
-
--->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Spring Security Example</title>
+        <title>Files</title>
+       
+      
+        <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+        <link th:href="@{/css/table.css}" rel="stylesheet" />
+        <link th:href="@{/css/buttonCss.css}" rel="stylesheet" />
+        <link th:href="@{/css/input.css}" rel="stylesheet" />
     </head>
     <body>
-        <h1>Welcome!</h1>
+        <div class="wrapper" >
+  
+            <div class="top_navbar">
+              <div class="hamburger">
+                 <div sec:authorize="hasRole('ROLE_ADMIN')" class="one"></div>
+                 <div class="two"></div>
+                 <div class="three"></div>
+              </div>
+              <div class="top_menu">
+                <div class="logo">
+                    <span th:remove="tag" sec:authentication="name">thymeleaf</span> 
+                </div>
+                <ul>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">
+                        <img id="try" th:src="@{/icons/lock-solid.svg}">
+                      </a></li>
+                      <li><a href="#">
+                        <img id="try" th:src="@{/icons/bell-solid.svg}">  
+                        </a></li>
+                      <li><a href="/profile">
+                        <img id="try" th:src="@{/icons/user-regular.svg}">
+                      </a></li>
+                      
+                </ul>
+              </div>
+            </div>
+            
+            <div class="sidebar">
+                <ul>
+                  <li><a href="/file">
+                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                    <span class="title">Files</span>
+                    </a></li>
 
-        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+                  <li><a href="/gallery">
+                    <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
+                    <span class="title">Gallery</span>
+                    </a></li>
+                  <!-- <li><a href="#" class="active">
+                    <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                    <span class="title">Profile</span>
+                    </a></li> -->
+
+
+                  <li><a href="/logout">
+                    <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
+                    <span class="title">Logout</span>
+                    </a>
+                </li>
+              </ul>
+            </div>
+            <div class="main_container">
+                <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                    <input class="input-style" type="file" id="file" name="file">
+                    name:<input type="text" name="name">
+                    <button class="button" type="submit">Upload</button>
+                </form>
+                <br>
+                <hr>
+                <div th:if="${admin}">
+                    <form action="/file" method="get">
+                        <label for="option">Choose an option:</label>
+                        <select id="option" name="option">
+                            <option value="no" disabled selected>Select an option</option>
+                            <option th:each="name : ${names}" name="option" th:value="${name.username}" th:text="${name.name}"></option>
+                        </select>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <hr>
+                <div class="container">
+                  <table >
+                    <thead >
+                      <tr>
+                        <th>File name</th>
+                        <th>Original name</th>
+                        <th>Content-type</th>
+                        <th>Date created</th>
+                        <th>Created By</th>
+                        <th>Download</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                     <tr th:each="file: ${files}" >
+
+                        <td class="filecol" th:text="${file.filename}"></td>
+                        <td class="filecol" th:text="${file.name}"></td>
+                        <td class="filecol" th:text="${file.contentType}"></td>
+                        <td class="filecol" th:text="${file.date}"></td>
+<!--                        <td th:text="${file.creator}"></td>-->
+                         <td class="filecol" th:text="${session.user}"></td>
+                        <td><form class = "downloadbtn" action="/download">
+                            <button class="button" type="submit" th:value="${file.getId()}" name="download">Dowload</button>
+                        </form></td>
+                         <td><form class = "downloadbtn" action="/file/del" method="post">
+                             <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+                             <button class="button" type="submit" th:value="${file.getId()}" name="id">Delete</button>
+                         </form></td>
+                    </tr>
+                     
+               
+                    </tbody>
+                  </table>
+                </div>
+                
+
+            </div>
+        </div>
+        
+        
+        
+        
+        <script type="text/javascript" th:src="@{/js/nav.js}"></script>
     </body>
+
 </html>

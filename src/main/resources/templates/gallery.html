@@ -1,0 +1,87 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Gallery</title>
+    <style>
+        .image-gallery {
+            display: flex;
+            justify-content: center; /* Center the images horizontally */
+            flex-wrap: wrap; /* Wrap images to the next line if necessary */
+            gap: 20px; /* Add space between images */
+        }
+
+        .image-gallery img {
+            max-width: 500px;
+            max-height: 500px;
+            display: block;
+        }
+    </style>
+
+    <link href="/css/navbar.css" rel="stylesheet" />
+    <link href="/css/table.css" rel="stylesheet" />
+    <link href="/css/buttonCss.css" rel="stylesheet" />
+    <link href="/css/input.css" rel="stylesheet" />
+    <link href="/css/img.css" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper" >
+
+    <div class="top_navbar">
+        <div class="hamburger">
+            <div class="one"></div>
+            <div class="two"></div>
+            <div class="three"></div>
+        </div>
+        <div class="top_menu">
+            <div class="logo">
+                <span th:remove="tag" sec:authentication="name">thymeleaf</span>
+            </div>
+            <ul>
+
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">
+                    <img id="try" th:src="@{/icons/lock-solid.svg}">
+                </a></li>
+                <li><a href="#">
+                    <img id="try" th:src="@{/icons/bell-solid.svg}">
+                </a></li>
+                <li><a href="/profile">
+                    <img id="try" th:src="@{/icons/user-regular.svg}">
+                </a></li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="/file">
+                <span id="sideicon" > <img th:src="@{/icons/file-regular.svg}"></span>
+                <span class="title">Files</span>
+            </a></li>
+
+            <li><a href="/gallery">
+                <span id="sideicon" > <img th:src="@{/icons/table-solid.svg}"></span>
+                <span class="title">Gallery</span>
+            </a></li>
+
+            <li><a href="/logout">
+                <span id="sideicon" > <img th:src="@{/icons/right-from-bracket-solid.svg}"></span>
+                <span class="title">Logout</span>
+            </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main_container">
+<!--    <table  align="center" th:each="file : ${imgs}">-->
+<!--        <tr>  <img th:src="'data:' + ${file.getContentType()} + ';base64,' + ${file.getFile()}"  alt="Image" style="max-width: 500px; max-height: 500px;" /></tr>-->
+<!--    </table>-->
+        <div class="image-gallery">
+            <div th:each="file : ${imgs}">
+                <img th:src="'data:' + ${file.getContentType()} + ';base64,' + ${file.getFile()}"
+                     alt="Image"  href=""/>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/nav.js}"></script>
+</body>
+</html>

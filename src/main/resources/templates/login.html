@@ -1,23 +1,112 @@
 <!DOCTYPE html>
- <!---
-    login page ye
-    DO NOT TOUCH THE HTML PAGE AND JO TH: WALE PARAMETER
-    -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
+
+<head>
+    <title>Login</title>
+    <style>
+        /* General styles */
+        body {
+            background-color: #D2DAFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .title{
+            font-family: serif;
+            font-size: 40px;
+        }
+        form{
+            background-color:#B1B2FF;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            padding-top: 10px;
+            text-align: center;
+            width: 400px;
+        }
+        /* Login form container */
+       
+
+        .error-message {
+            color: red; /* Adjust color as needed */
+            text-align: center;
+            margin-bottom: 15px; /* Add spacing for better visual separation */
+        }
+
+        /* Labels and inputs */
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px; 
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Login button */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+    <script>
+        function showErrorPopup() {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <div id="error-message"
+        style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        Invalid username or password.
+    </div>
+    <div th:if="${param.error}">
+        <script>showErrorPopup();</script>
+    </div> -->
+    <!-- <div th:if="${param.error}" class="error-message">
+        Invalid username and password.
+    </div>
+    
+    <div th:if="${param.logout}" class="error-message"> You have been logged out. </div> -->
+    <div class="login-form" style="text-align: center;"> 
+       <h1 class="title">MCA DEPARTMENT </h1>
+       
+        <div th:if="${param.error}" class="error-message">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
+        
+        <div th:if="${param.logout}" class="error-message"> You have been logged out. </div>
+        <form th:action="@{/login}" method="post" >
+            <h2>Login</h2><br>
+            <div><label> User Name : <input type="text" name="username" /></label></div>
+            <div><label> Password: <input type="password" name="password" /></label></div>
+            <div><input type="submit" value="Sign In" /></div>
         </form>
-    </body>
+        <a th:href="@{/register}">Register new staff member</a>
+    </div>
+</body>
+
 </html>

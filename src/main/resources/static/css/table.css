@@ -1,0 +1,78 @@
+
+
+
+.container {
+	width: 100%;
+	max-width: 1000px; /* Maximum width of the table */
+	padding: 20px; /* Add some padding for smaller screens */
+	box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+.container table {
+	width: 100%;
+	border-collapse: separate; /* Allow border-radius */
+	border-spacing: 0; /* Remove spacing between cells */
+	border-radius: 15px; /* Rounded corners */
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	background-color: rgba(0, 0, 139, 0.1); /* Dark blue */
+}
+
+.container th,
+.container td {
+	padding: 15px;
+	background-color: rgba(0, 0, 255, 0.2); /* Blue for table cells */
+	color: #fff;
+	word-break: break-word; /* Ensure long words break to fit in cells */
+}
+.downloadbtn{
+    width:180px;
+}
+
+.filecol{
+    width:180px;
+}
+
+.button{
+    align:center;
+}
+
+.container th {
+	text-align: left;
+}
+
+.container thead th {
+	background-color: #00008b; /* Dark blue for table headers */
+}
+
+.container tbody tr:hover {
+	background-color: rgba(0, 0, 255, 0.3); /* Blue on row hover */
+}
+
+.container tbody td {
+	position: relative;
+}
+
+.container tbody td:hover:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: -9999px;
+	bottom: -9999px;
+	background-color: rgba(0, 0, 255, 0.2); /* Blue on cell hover */
+	z-index: -1;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+	.container table {
+		width: 100%; /* Full width for small screens */
+	}
+
+	.container th,
+	.container td {
+		padding: 10px; /* Reduce padding for smaller screens */
+		font-size: 14px; /* Adjust font size for smaller screens */
+	}
+}

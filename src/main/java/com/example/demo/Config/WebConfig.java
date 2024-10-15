@@ -1,12 +1,15 @@
-package com.example.demo;
+package com.example.demo.Config;
 
 
 import java.io.IOException;
 
+import com.example.demo.util.UserDetailModel;
+import com.example.demo.util.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -16,25 +19,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.example.demo.Config.CustomUserDetails;
-import com.example.demo.SERVICE.UserPOJOService;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @ComponentScan("com.example.demo")
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true,jsr250Enabled = true)
 public class WebConfig {
 
 
 
     @Bean
     UserDetailsService userDetailsService() {
-        return new UserPOJOService();
+        return new UserServiceImpl();
     }
 
     @Bean
@@ -59,7 +60,7 @@ public class WebConfig {
 
         http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home","/register","/registerhtml").permitAll()
+				.requestMatchers("/register","/registerhtml").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -67,7 +68,8 @@ public class WebConfig {
                 .successHandler(new CustomAuthenticationSuccessHandler())
 				.permitAll()
 			)
-			.logout((logout) -> logout.logoutSuccessUrl("/login")
+			.logout((logout) ->logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutSuccessUrl("/login")
                                 .invalidateHttpSession(true)  // Invalidate the session
                                 .deleteCookies("JSESSIONID")        
                                 .permitAll()            
@@ -83,15 +85,18 @@ public class WebConfig {
 
 class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws IOException, ServletException {
-                
-                CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-                request.getSession().setAttribute("user", authentication.getName());
-                request.getSession().setAttribute("name", userDetails.getName());
-                // Redirect to default URL or any other logic
-                response.sendRedirect("/");
+                                        Authentication authentication) throws IOException, ServletException {
+
+        UserDetailModel userDetails = (UserDetailModel)  authentication.getPrincipal();
+        request.getSession().setAttribute("user", authentication.getName());
+        request.getSession().setAttribute("fullname", userDetails.getUsername());
+        request.getSession().setAttribute("id",userDetails.getId());
+        // Redirect to default URL or any other logic
+        response.sendRedirect("/file");
     }
     
 }

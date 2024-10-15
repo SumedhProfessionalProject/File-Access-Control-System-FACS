@@ -1,24 +1,47 @@
 package com.example.demo.POJOS;
 
+import jakarta.persistence.*;
+import lombok.*;
 import org.apache.catalina.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
+import java.util.*;
 
-@Entity(name="users")
+/**
+ * User POJO
+ * @author
+ *    sumedh
+ */
+@Entity
+@Table(name="users")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserPOJO {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @NonNull
+    @Column(unique = true)
     private String username;
 
-    private String name;
-
-    private String position;
-
+    @Column
     private String password;
 
-    private boolean isadmin;
+    @NonNull
+    @Column
+    private String roles;
+
+    @NonNull
+    @Column
+    private String name;
+
+    @Column(unique = true)
+    private String email;
+
+
+
 
 }

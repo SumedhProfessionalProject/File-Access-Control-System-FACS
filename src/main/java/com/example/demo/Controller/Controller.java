@@ -1,64 +1,57 @@
 package com.example.demo.Controller;
 
+import java.util.*;
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.POJOS.FilePOJO;
 import com.example.demo.POJOS.UserPOJO;
+import com.example.demo.SERVICE.FileService;
 import com.example.demo.SERVICE.UserPOJOService;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
-
+@SessionAttributes("user")
 @RestController
 public class Controller {
 
         @Autowired
         private UserPOJOService userPOJOService;
 
-        @PostMapping("/registerhtml")
-        public ModelAndView processRegister(@RequestParam String username,
-                                            @RequestParam String password,
-                                            @RequestParam String name,
-                                            @RequestParam String position,
-                                            @RequestParam String adminusername,
-                                            @RequestParam String adminpassword
-                                    ) {
-            ModelAndView modelAndView=new ModelAndView("register");
-            
-            if(userPOJOService.checkAdmin(adminusername, adminpassword)){  
-                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                UserPOJO userPOJO=new UserPOJO();
-                userPOJO.setIsadmin(false);
-                userPOJO.setName(name);
-                userPOJO.setPosition(position);
-                userPOJO.setUsername(username);
-                String encodedPassword = passwordEncoder.encode(password);
-                userPOJO.setPassword(encodedPassword);
-            
-                userPOJOService.save(userPOJO);
-                passwordEncoder=null;
-                userPOJO=null;
-                modelAndView.addObject("msg", "success");
-                return modelAndView;
-            }
-            modelAndView.addObject("msg", "unsuccess");
-            return modelAndView;
-            
-            
+        @Autowired
+        private FileService fileService;
+
+        @GetMapping("/gallery")
+        public ModelAndView getImgs(HttpSession session){
+                return new ModelAndView("gallery").addObject("imgs",fileService.getAll(
+                        (String) session.getAttribute("id")
+                ));
         }
 
         @GetMapping("/file")
-        public ModelAndView getMethodName(HttpServletRequest request) {
-            System.out.println((String) request.getSession().getAttribute("name"));
-            return new ModelAndView("file");
+        public ModelAndView modelAndView(HttpSession session){
+
+                return new ModelAndView("file").addObject("files",fileService.getAll((String) session.getAttribute("id")));
+        }
+
+        @GetMapping("/login")
+        public ModelAndView getImgslogim(){
+                return new ModelAndView("login");
+        }
+
+        @PostMapping("/file/del")
+        public ModelAndView deleteTheFile(@RequestParam String id){
+                System.out.println(id);
+                fileService.del(id);
+                return new ModelAndView("redirect:/file");
         }
         
 }
