@@ -37,9 +37,12 @@ public class Controller {
         }
 
         @GetMapping("/file")
-        public ModelAndView modelAndView(HttpSession session){
+        public ModelAndView modelAndView(HttpSession session) throws Exception {
 
-                return new ModelAndView("file").addObject("files",fileService.getAll((String) session.getAttribute("id")));
+                        return new ModelAndView("file").addObject("files", fileService.getAll((String) session.getAttribute("id")));
+
+
+
         }
 
         @GetMapping("/login")

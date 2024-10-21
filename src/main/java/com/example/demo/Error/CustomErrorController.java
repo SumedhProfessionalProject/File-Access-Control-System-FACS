@@ -33,10 +33,11 @@ public class CustomErrorController implements ErrorController {
                ModelAndView("error").
                addObject("msg", "FORBIDDEN ACCESS");
         }else if(status == HttpStatus.INTERNAL_SERVER_ERROR.value()){
-            System.out.println(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+            System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            System.out.println(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
             return new
                ModelAndView("error").
-               addObject("msg", "SERVER ERROR");
+               addObject("msg", HttpStatus.INTERNAL_SERVER_ERROR.toString());
 
         }else{
             return new 

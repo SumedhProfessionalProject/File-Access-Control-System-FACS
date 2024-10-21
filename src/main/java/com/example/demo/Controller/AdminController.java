@@ -50,4 +50,12 @@ public class AdminController {
         }
         return modelAndView;
     }
+
+    @PostMapping("/admin/del")
+    public ModelAndView modelAndView(@RequestParam String id){
+        if(userPOJOService.isAdmin(id))
+            return new ModelAndView("redirect:/admin");
+        userPOJOService.del(id);
+        return new ModelAndView("redirect:/admin");
+    }
 }
