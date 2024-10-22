@@ -1,5 +1,6 @@
 package com.example.demo.SERVICE;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +11,12 @@ import com.example.demo.POJOS.FilePOJO;
 import com.example.demo.POJOS.UserPOJO;
 import com.example.demo.REPOS.FileRepo;
 import com.example.demo.REPOS.UserRepo;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * File service to process files
  */
+@Transactional
 @Service
 public class FileService {
     
@@ -30,6 +33,7 @@ public class FileService {
         
     }
 
+
     /**
      * get all info for both admin and user
      * @param user
@@ -37,19 +41,20 @@ public class FileService {
      */
     public List<FilePOJO> getAll(String id){
 
-        if(userRepo.isAdmin(id)){
 
+        if(userRepo.isAdmin(id)){
+        //    System.out.println(fileRepo.findAll());
             return fileRepo.findAll();
         }else{
-
-            return fileRepo.getData(id);
+         //   System.out.println(fileRepo.getData(id));
+            return fileRepo.getFilesForUser(id);
         }
 
 
     }
 
     public FilePOJO getFile(String name){
-        return fileRepo.findById(name).orElse(null);
+        return fileRepo.findById(name).orElseThrow(()->new RuntimeException("No file"));
     }
 
     public List<FilePOJO> getGallery(){
@@ -75,6 +80,10 @@ public class FileService {
         hashMap.put("video",fileRepo.getNumberOfVideo(id));
         hashMap.put("other",others);
         return hashMap;
+    }
+
+    public UserPOJO createUser(String id){
+        return fileRepo.getUser(id);
     }
 
 

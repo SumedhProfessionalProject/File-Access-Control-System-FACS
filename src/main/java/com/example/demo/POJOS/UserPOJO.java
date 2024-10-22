@@ -1,5 +1,7 @@
 package com.example.demo.POJOS;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.catalina.User;
@@ -38,10 +40,14 @@ public class UserPOJO {
     @Column
     private String name;
 
+
     @Column(unique = true)
     private String email;
 
 
+    @OneToMany(mappedBy = "creator",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<FilePOJO> filePOJOS;
 
 
 }

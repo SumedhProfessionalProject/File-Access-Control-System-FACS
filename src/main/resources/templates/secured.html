@@ -10,6 +10,16 @@
     <link th:href="@{/css/table.css}" rel="stylesheet" />
     <link th:href="@{/css/buttonCss.css}" rel="stylesheet" />
     <link th:href="@{/css/input.css}" rel="stylesheet" />
+
+    <script>
+        function confirmSubmission(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var result = confirm("Are you sure you want to delete the user?");
+            if (result) {
+                document.getElementById("myForm").submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="wrapper" >
@@ -26,10 +36,10 @@
             </div>
             <ul>
              
-                <li><a href="/secured">
+                <li><a href="/admin">
                     <img id="try" th:src="@{/icons/lock-solid.svg}">
                   </a></li>
-                  <li><a href="#">
+                  <li><a href="/data">
                     <img id="try" th:src="@{/icons/bell-solid.svg}">  
                     </a></li>
                   <li><a href="#">
@@ -68,7 +78,7 @@
                         <th>User</th>
                         <th>Name</th>
                         <th>Email</th>
-
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody >
@@ -76,15 +86,20 @@
                         <td th:text="${user.getUsername()}"></td>
                         <td th:text="${user.getName()}"></td>
                         <td th:text="${user.getEmail()}"></td>
+                        <td> <form  id="myForm" th:action="@{/admin/del}" method="post">
+                            <input type="hidden" name="id" th:value="${user.getId()}"/>
+                            <button class="button" type="submit" onclick="confirmSubmission(event)" >Delete</button>
+                        </form></td>
 
-<!--                        <td><form action="/download">-->
-<!--                            <button class="button" type="submit" th:value="${user.getId()}" name="download">Dowload</button>-->
-<!--                        </form></td>-->
                     </tr>
 
 
                     </tbody>
                 </table>
+                <div th:if="${msg!=null}">
+                    <p th:text="${msg}"></p>
+
+                </div>
             </div>
 
 

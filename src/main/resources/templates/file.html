@@ -28,7 +28,7 @@
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">
                         <img id="try" th:src="@{/icons/lock-solid.svg}">
                       </a></li>
-                      <li><a href="#">
+                      <li><a href="/data">
                         <img id="try" th:src="@{/icons/bell-solid.svg}">  
                         </a></li>
                       <li><a href="/profile">
@@ -83,6 +83,7 @@
                 </div>
                 <hr>
                 <div class="container">
+
                   <table >
                     <thead >
                       <tr>
@@ -103,7 +104,7 @@
                         <td class="filecol" th:text="${file.contentType}"></td>
                         <td class="filecol" th:text="${file.date}"></td>
 <!--                        <td th:text="${file.creator}"></td>-->
-                         <td class="filecol" th:text="${session.user}"></td>
+                         <td class="filecol" th:text="${file.creator.username}"></td>
                         <td><form class = "downloadbtn" action="/download">
                             <button class="button" type="submit" th:value="${file.getId()}" name="download">Dowload</button>
                         </form></td>
@@ -117,6 +118,7 @@
                
                     </tbody>
                   </table>
+
                 </div>
                 
 

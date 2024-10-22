@@ -33,6 +33,8 @@ public class UserPOJOService  {
         userRepo.save(user);
     }
 
+    public void del(String id){ userRepo.deleteById(id); }
+
     public boolean isUsernamePresent(String username){
 
         return userRepo.findByUsername(username).isEmpty();
@@ -63,8 +65,8 @@ public class UserPOJOService  {
 //
 //    }
 
-    public boolean isAdmin(String name){
-        UserPOJO userPojo=userRepo.findById(name).orElse(null);
+    public boolean isAdmin(String id){
+        UserPOJO userPojo=userRepo.findById(id).orElse(null);
         return userPojo !=null && userPojo.getRoles().equals("ROLE_ADMIN") ;
 
     }
@@ -81,6 +83,7 @@ public class UserPOJOService  {
     }
 
     public UserPOJO getUser(String id){
+        System.out.println("hello world");
         return userRepo.findById(id).orElseThrow(()->new RuntimeException("Username not found"));
     }
 

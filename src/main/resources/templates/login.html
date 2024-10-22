@@ -17,7 +17,7 @@
 
         .title{
             font-family: serif;
-            font-size: 40px;
+            font-size: 30px;
         }
         form{
             background-color:#B1B2FF;
@@ -92,7 +92,7 @@
     
     <div th:if="${param.logout}" class="error-message"> You have been logged out. </div> -->
     <div class="login-form" style="text-align: center;"> 
-       <h1 class="title">MCA DEPARTMENT </h1>
+       <h1 class="title">File Access Control System (FACS)</h1>
        
         <div th:if="${param.error}" class="error-message">
             Invalid username and password.
@@ -105,7 +105,7 @@
             <div><label> Password: <input type="password" name="password" /></label></div>
             <div><input type="submit" value="Sign In" /></div>
         </form>
-        <a th:href="@{/register}">Register new staff member</a>
+
     </div>
 </body>
 

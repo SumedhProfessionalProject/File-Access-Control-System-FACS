@@ -28,7 +28,7 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">
                     <img id="try" th:src="@{/icons/lock-solid.svg}">
                 </a></li>
-                <li><a href="#">
+                <li><a href="/data">
                     <img id="try" th:src="@{/icons/bell-solid.svg}">
                 </a></li>
                 <li><a href="/profile">
@@ -64,24 +64,9 @@
         </ul>
     </div>
     <div class="main_container">
-        <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
-            <input class="input-style" type="file" id="file" name="file">
-            name:<input type="text" name="name">
-            <button class="button" type="submit">Upload</button>
-        </form>
-        <br>
-        <hr>
-        <div th:if="${admin}">
-            <form action="/file" method="get">
-                <label for="option">Choose an option:</label>
-                <select id="option" name="option">
-                    <option value="no" disabled selected>Select an option</option>
-                    <option th:each="name : ${names}" name="option" th:value="${name.username}" th:text="${name.name}"></option>
-                </select>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        <hr>
+
+
+
         <div class="container">
             <table >
                 <thead >

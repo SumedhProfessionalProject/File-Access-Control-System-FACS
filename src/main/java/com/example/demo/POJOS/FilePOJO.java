@@ -1,15 +1,21 @@
 package com.example.demo.POJOS;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *  File POJO
  * @author
  *    sumedh
  */
+@Getter
+@Setter
 @Entity
-@Table(name="filemanager")
+@Table(name = "filemanager")
 @Data
 public class FilePOJO {
     
@@ -27,12 +33,12 @@ public class FilePOJO {
     @Column(columnDefinition = "LONGBLOB")
     private String file;
 
-    private String creator;
-
 
     private String contentType;
 
-
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
+    private UserPOJO creator;
 
 }
