@@ -53,6 +53,7 @@ public class AdminController {
 
     @PostMapping("/admin/del")
     public ModelAndView modelAndView(@RequestParam String id){
+        System.out.println(id);
         if(userPOJOService.isAdmin(id))
             return new ModelAndView("redirect:/admin");
         userPOJOService.del(id);
